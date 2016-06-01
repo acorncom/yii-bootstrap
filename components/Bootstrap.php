@@ -266,7 +266,9 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function registerTooltip($selector = null, $options = array())
 	{
-		$this->registerPlugin(self::PLUGIN_TOOLTIP, $selector, $options, $this->tooltipSelector);
+		if (!isset($options['selector']))
+			$options['selector'] = $selector !== null ? $selector : 'a[rel=tooltip]';
+		$this->registerPlugin(self::PLUGIN_TOOLTIP, 'body', $options);
 	}
 
 	/**
